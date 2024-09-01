@@ -1,14 +1,48 @@
 "use client";
 import Button from "./ui/Button";
 import StarsBg from "@/assets/stars.png";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useRef } from "react";
+
 export const Hero = () => {
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end"],
+  });
+
+  const backgroundPositionY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [-300, 300]
+  );
+
+  // useMotionValueEvent(scrollYProgress, 'change' , (value)=>{
+  //   console.log('scrollYProgress' , value)
+  // })
+
   return (
-    <section
+    <motion.section
+      ref={sectionRef}
       className="h-[392px] md:h-[800px] flex items-center relative overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] "
       style={{
         backgroundImage: `url(${StarsBg.src})`,
         backgroundRepeat: `repeat`,
+        backgroundPositionY,
+      }}
+      animate={{
+        backgroundPositionX: StarsBg.width,
+      }}
+      transition={{
+        repeat: Infinity,
+        ease: "linear",
+        duration: 120,
       }}
     >
       <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_center_center,rgb(140,69,255,.5)_15%,rgb(14,0,36,.5)_78%,transparent)] "></div>
@@ -24,15 +58,17 @@ export const Hero = () => {
 
       {/* ring 1 start */}
       <motion.div
-        style={{ 
-          translateY:'-50%',
-          translateX:'-50%',
+        style={{
+          translateY: "-50%",
+          translateX: "-50%",
         }}
         animate={{
           rotate: "1turn",
         }}
         transition={{
-          duration:30,
+          repeat: Infinity,
+          duration: 30,
+          ease: "linear",
         }}
         className="absolute size-[344px] md:size-[580px] rounded-full border opacity-20 border-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
       >
@@ -45,13 +81,41 @@ export const Hero = () => {
       {/* ring 1 end */}
 
       {/* ring 2 start */}
-      <div className="absolute size-[444px] md:size-[780px] rounded-full border opacity-20 border-white  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  border-dashed"></div>
+      <motion.div
+        style={{
+          translateY: "-50%",
+          translateX: "-50%",
+        }}
+        animate={{
+          rotate: "-1turn",
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 70,
+          ease: "linear",
+        }}
+        className="absolute size-[444px] md:size-[780px] rounded-full border opacity-20 border-white  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  border-dashed"
+      ></motion.div>
       {/* ring 2 end */}
       {/* ring 3 start */}
-      <div className="absolute size-[544px] md:size-[980px] rounded-full border opacity-20 border-white  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  ">
-        <div className="absolute size-2 top-1/2 left-0 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+      <motion.div
+        style={{
+          translateY: "-50%",
+          translateX: "-50%",
+        }}
+        animate={{
+          rotate: "1turn",
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 70,
+          ease: "linear",
+        }}
+        className="absolute size-[544px] md:size-[980px] rounded-full border opacity-20 border-white  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  "
+      >
+        <div className="absolute size-4 top-1/2 left-0 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute size-2 top-0 left-1/2 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-      </div>
+      </motion.div>
       {/* ring 3 end */}
 
       <div className="container relative mt-16">
@@ -66,6 +130,6 @@ export const Hero = () => {
           <Button>Join waitlist now</Button>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
