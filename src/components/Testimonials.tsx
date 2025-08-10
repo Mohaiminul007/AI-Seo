@@ -39,7 +39,7 @@ export const Testimonials = () => {
       <div className="container">
         <h1 className="all-heading tracking-tighter ">Beyond Expectations.</h1>
         <p className="all-para mt-5 max-w-sm">
-          Our revolutionary AI SEO tools have transformed our clients'
+          Our revolutionary AI SEO tools have transformed our client&apos; s
           strategies.
         </p>
         <div className=" flex overflow-hidden mt-10 [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">

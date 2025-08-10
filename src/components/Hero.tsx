@@ -123,7 +123,7 @@ export const Hero = () => {
           AI SEO
         </h1>
         <p className="all-para max-w-xl">
-          Elevate your site's visibility effortlessly with AI, where smart
+          Elevate your site&apos;s visibility effortlessly with AI, where smart
           technology meets user-friendly SEO tools.
         </p>
         <div className="flex justify-center mt-5">
