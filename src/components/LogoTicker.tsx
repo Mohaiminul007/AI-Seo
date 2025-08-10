@@ -6,6 +6,16 @@ import quantumLogo from "@/assets/logo-quantum.png";
 import pulseLogo from "@/assets/logo-pulse.png";
 import echoLogo from "@/assets/logo-echo.png";
 import { motion } from "framer-motion";
+import Image from "next/image"; // ADDED: Import the Next.js Image component
+
+const logos = [
+  { src: acmeLogo, alt: "Acme Corp logo" },
+  { src: apexLogo, alt: "Apex Corp logo" },
+  { src: celestialLogo, alt: "Celestial Corp logo" },
+  { src: quantumLogo, alt: "Quantum Corp logo" },
+  { src: pulseLogo, alt: "Pulse Corp logo" },
+  { src: echoLogo, alt: "Echo Corp logo" },
+];
 
 export const LogoTicker = () => {
   return (
@@ -15,32 +25,24 @@ export const LogoTicker = () => {
           <div className="flex-1 md:flex-none">
             <h2>Trusted by top innovative teams</h2>
           </div>
-          <div className=" flex flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
+          <div className="flex flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
             <motion.div
               initial={{ translateX: "-50%" }}
               animate={{ translateX: "0%" }}
-              transition={{ 
-                repeat: Infinity, 
+              transition={{
+                repeat: Infinity,
                 duration: 30,
-                ease:'linear' 
+                ease: "linear",
               }}
               className="flex flex-none gap-14 pr-14 -translate-x-1/2"
             >
-              {[
-                acmeLogo,
-                apexLogo,
-                celestialLogo,
-                quantumLogo,
-                pulseLogo,
-                echoLogo,
-                acmeLogo,
-                apexLogo,
-                celestialLogo,
-                quantumLogo,
-                pulseLogo,
-                echoLogo,
-              ].map((logo) => (
-                <img src={logo.src} key={logo.src} className="h-6 w-auto" />
+              {[...logos, ...logos].map((logo, index) => (
+                <Image
+                  key={index}
+                  src={logo.src}
+                  alt={logo.alt} 
+                  className="h-6 w-auto"
+                />
               ))}
             </motion.div>
           </div>

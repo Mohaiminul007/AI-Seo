@@ -82,7 +82,7 @@ const FeaturesTab = (
     };
     animate(xPercentage, [0, 100, 100, 0, 0], options);
     animate(YPercentage, [0, 0, 100, 100, 0], options);
-  }, [props.selected]);
+  }, [props.selected, xPercentage, YPercentage]); // FIXED: Added xPercentage and YPercentage
 
   const handleTabHover = () => {
     if (dotLottieRef.current === null) return;
@@ -128,14 +128,13 @@ export default FeaturesTab;
 
 export const Features = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  
+
   const backgroundPositionX = useMotionValue(tabs[0].backgroundPositionX);
   const backgroundPositionY = useMotionValue(tabs[0].backgroundPositionY);
   const backgroundSizeX = useMotionValue(tabs[0].backgroundSizeX);
 
   const backgroundSize = useMotionTemplate`${backgroundSizeX}% auto`;
   const backgroundPosition = useMotionTemplate`${backgroundPositionX}% ${backgroundPositionY}%`;
-  
 
   const handleSelectTab = (index: number) => {
     setSelectedTab(index);
@@ -162,7 +161,7 @@ export const Features = () => {
     );
   };
 
-  
+
   return (
     <section className="py-20 md:py-24">
       <div className="container">
@@ -174,7 +173,7 @@ export const Features = () => {
           revolutionized the way businesses approach SEO.
         </p>
 
-        <div className="mt-10 flex lg:flex-row flex-col gap-3">
+        <div className="mt-10 flex lg:flex-row flex-col cursor-pointer gap-3">
           {tabs.map((tab, tabIndex) => (
             <FeaturesTab
               {...tab}
